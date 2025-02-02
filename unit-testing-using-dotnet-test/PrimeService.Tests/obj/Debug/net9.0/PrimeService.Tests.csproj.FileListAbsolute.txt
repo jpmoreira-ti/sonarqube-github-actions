@@ -99,3 +99,13 @@
 /Users/jp/Documents/Projects/sonarqube-github-actions/unit-testing-using-dotnet-test/PrimeService.Tests/obj/Debug/net9.0/PrimeService.Tests.pdb
 /Users/jp/Documents/Projects/sonarqube-github-actions/unit-testing-using-dotnet-test/PrimeService.Tests/obj/Debug/net9.0/PrimeService.Tests.genruntimeconfig.cache
 /Users/jp/Documents/Projects/sonarqube-github-actions/unit-testing-using-dotnet-test/PrimeService.Tests/obj/Debug/net9.0/ref/PrimeService.Tests.dll
+/Users/jp/Documents/Projects/sonarqube-github-actions/output-tests/.msCoverageSourceRootsMapping_PrimeService.Tests
+/Users/jp/Documents/Projects/sonarqube-github-actions/output-tests/CoverletSourceRootsMapping_PrimeService.Tests
+/Users/jp/Documents/Projects/sonarqube-github-actions/output-tests/xunit.runner.visualstudio.testadapter.dll
+/Users/jp/Documents/Projects/sonarqube-github-actions/output-tests/xunit.runner.reporters.netcoreapp10.dll
+/Users/jp/Documents/Projects/sonarqube-github-actions/output-tests/xunit.runner.utility.netcoreapp10.dll
+/Users/jp/Documents/Projects/sonarqube-github-actions/output-tests/PrimeService.Tests.deps.json
+/Users/jp/Documents/Projects/sonarqube-github-actions/output-tests/PrimeService.Tests.runtimeconfig.json
+/Users/jp/Documents/Projects/sonarqube-github-actions/output-tests/PrimeService.Tests.dll
+/Users/jp/Documents/Projects/sonarqube-github-actions/output-tests/PrimeService.Tests.pdb
+/Users/jp/Documents/Projects/sonarqube-github-actions/unit-testing-using-dotnet-test/PrimeService.Tests/obj/Debug/net9.0/PrimeService.Tests.sourcelink.json
