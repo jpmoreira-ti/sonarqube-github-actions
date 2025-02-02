@@ -17,25 +17,25 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '9.0.x'
 
       - name: Install .NET Tools
         run: |
             dotnet tool install --global dotnet-sonarscanner --version 9.0.2 && \
             dotnet tool install --global coverlet.console --version 6.0.4 
 
-      - name: Set Working Directory
-        run: cd ./sonarqube-github-actions/unit-testing-using-dotnet-test/PrimeService.Tests/
-      
       - name: Restore Dependencies
+        working-directory: ./unit-testing-using-dotnet-test/PrimeService.Tests/
         run: dotnet restore PrimeService.Tests.csproj
       
       - name: Build Test Project
+        working-directory: ./unit-testing-using-dotnet-test/PrimeService.Tests/
         run: dotnet build PrimeService.Tests.csproj --configuration Debug
 
       - name: Run Tests With Coverage
+        working-directory: ./unit-testing-using-dotnet-test/PrimeService.Tests/
         run: |
           dotnet test --configuration Debug --output ../../output-tests \
             /p:CollectCoverage=true \
@@ -43,4 +43,14 @@ jobs:
             /p:CoverletOutput='coverage.opencover.xml'   
     
       - name: Run .NET Scanner
-        run: dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+        working-directory: ./unit-testing-using-dotnet-test/PrimeService.Tests/
+        run: |
+          dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" \
+          /d:sonar.host.url="$SONAR_URL" \
+          /d:sonar.login="$SONAR_TOKEN" \
+          /d:sonar.cs.opencover.reportsPaths="./unit-testing-using-dotnet-test/PrimeService.Tests/coverage.opencover.xml" \
+          /d:sonar.analysis.mode="publish" 
+          
+          dotnet build ./unit-testing-using-dotnet-test/
+          
+          dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
