@@ -22,7 +22,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Install .NET scanner tool
-        run: dotnet tool install --global dotnet-scan    
+        run: dotnet tool install --global dotnet-sonarscanner --version 9.0.2   
 
       - name: Set working directory
         run: cd ./sonarqube-github-actions/unit-testing-using-dotnet-test/PrimeService
