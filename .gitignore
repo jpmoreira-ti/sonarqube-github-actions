@@ -1,0 +1,21 @@
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore Rider project files
+.idea/
+
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore test results
+TestResults/
+output-tests/
+
+# Ignore coverage files
+coverage.opencover.xml
+coverage/
+
+# Ignore build outputs
+bin/
+obj/
