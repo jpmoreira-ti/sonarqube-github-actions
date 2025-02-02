@@ -1,0 +1,37 @@
+name: Build and Scan .NET Project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install .NET scanner tool
+        run: dotnet tool install --global dotnet-scan    
+
+      - name: Set working directory
+        run: cd ./sonarqube-github-actions/unit-testing-using-dotnet-test/PrimeService
+  
+      - name: Restore dependencies
+        run: dotnet restore PrimeService.csproj
+    
+      - name: Build project
+        run: dotnet build PrimeService.csproj --configuration Release
+    
+      - name: Run .NET scanner
+        run: dotnet tool run dotnet-scan --project PrimeService.csproj
