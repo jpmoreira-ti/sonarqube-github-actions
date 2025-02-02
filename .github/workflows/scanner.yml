@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
 
       - name: Setup .NET
@@ -21,17 +21,26 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Install .NET scanner tool
-        run: dotnet tool install --global dotnet-sonarscanner --version 9.0.2   
+      - name: Install .NET Tools
+        run: |
+            dotnet tool install --global dotnet-sonarscanner --version 9.0.2 && \
+            dotnet tool install --global coverlet.console --version 6.0.4 
 
-      - name: Set working directory
-        run: cd ./sonarqube-github-actions/unit-testing-using-dotnet-test/PrimeService
-  
-      - name: Restore dependencies
-        run: dotnet restore PrimeService.csproj
+      - name: Set Working Directory
+        run: cd ./sonarqube-github-actions/unit-testing-using-dotnet-test/PrimeService.Tests/
+      
+      - name: Restore Dependencies
+        run: dotnet restore PrimeService.Tests.csproj
+      
+      - name: Build Test Project
+        run: dotnet build PrimeService.Tests.csproj --configuration Debug
+
+      - name: Run Tests With Coverage
+        run: |
+          dotnet test --configuration Debug --output ../../output-tests \
+            /p:CollectCoverage=true \
+            /p:CoverletOutputFormat=opencover \
+            /p:CoverletOutput='coverage.opencover.xml'   
     
-      - name: Build project
-        run: dotnet build PrimeService.csproj --configuration Release
-    
-      - name: Run .NET scanner
-        run: dotnet tool run dotnet-scan --project PrimeService.csproj
+      - name: Run .NET Scanner
+        run: dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
